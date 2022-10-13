@@ -12,7 +12,7 @@ public class Item : ScriptableObject
     public Image itemImage;
     public int itemHeld;
 
-    bool isequip;
-    
+    public bool isequip;
+
 }
 
