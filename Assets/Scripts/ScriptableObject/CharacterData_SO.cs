@@ -13,7 +13,5 @@ public class CharacterData_SO : ScriptableObject
     public int currentHV;  //當前飢餓度HungerValue
     public int  maxSP;  //最大耐力值
     public int  currentSP;  //當前耐力值
-
-
 }
 
