@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class ItmeOnWorld : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Item thisItem;
+    public Inventory playerInvnentory;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Player"))
+        {
+            AddNewItem();
+            Destroy(gameObject);
+            
+        }
+    }
+    public void AddNewItem()
+    {
+        if(!playerInvnentory.itemLists.Contains(thisItem))
+        {
+            playerInvnentory.itemLists.Add(thisItem);
+        }
+        else
+        {
+            thisItem.itemHeld +=1;
+        }
     }
 }
