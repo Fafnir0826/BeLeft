@@ -21,10 +21,12 @@ public class ItmeOnWorld : MonoBehaviour
         if(!playerInvnentory.itemLists.Contains(thisItem))
         {
             playerInvnentory.itemLists.Add(thisItem);
+            InventoryManager.CreateNewItem(thisItem);
         }
         else
         {
             thisItem.itemHeld +=1;
         }
+        InventoryManager.RefreshItem();
     }
 }

@@ -9,7 +9,7 @@ public class Item : ScriptableObject
 {
     [Header("Item Attributes")]
     public string itemName;
-    public Image itemImage;
+    public Sprite itemImage;
     public int itemHeld;
 
     public bool isequip;
