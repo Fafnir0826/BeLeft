@@ -7,15 +7,6 @@ public class ItmeOnWorld : MonoBehaviour
     public Item thisItem;
     public Inventory playerInvnentory;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            AddNewItem();
-            Destroy(gameObject);
-            
-        }
-    }
     public void AddNewItem()
     {
         if(!playerInvnentory.itemLists.Contains(thisItem))
@@ -28,5 +19,6 @@ public class ItmeOnWorld : MonoBehaviour
             thisItem.itemHeld +=1;
         }
         InventoryManager.RefreshItem();
+        Destroy(this.gameObject);
     }
 }
