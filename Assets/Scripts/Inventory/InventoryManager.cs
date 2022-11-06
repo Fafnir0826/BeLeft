@@ -44,5 +44,5 @@ public class InventoryManager : MonoBehaviour
             CreateNewItem(instance.myBag.itemLists[i]);
         }
     }
-    
+  
 }
