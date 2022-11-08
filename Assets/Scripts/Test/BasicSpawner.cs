@@ -5,6 +5,8 @@ using Fusion;
 using Fusion.Sockets;
 using System;
 using UnityEngine.SceneManagement;
+using Valve.VR.InteractionSystem;
+using Valve.VR;
 
 public class BasicSpawner : MonoBehaviour,INetworkRunnerCallbacks
 {
@@ -12,6 +14,8 @@ public class BasicSpawner : MonoBehaviour,INetworkRunnerCallbacks
     private NetworkRunner networkRunner;
     [SerializeField]
     private NetworkPrefabRef playerPrefab;
+
+    public SteamVR_Action_Vector2 vrInput;
 
     private Dictionary<PlayerRef, NetworkObject> playerList = new Dictionary<PlayerRef, NetworkObject>();
 
@@ -49,7 +53,18 @@ public class BasicSpawner : MonoBehaviour,INetworkRunnerCallbacks
             playerList.Remove(player);
         }
     }
-    public void OnInput(NetworkRunner runner, NetworkInput input) { }
+    public void OnInput(NetworkRunner runner, NetworkInput input) 
+    {
+        var data = new NetworkInputData();
+         
+        if (vrInput.axis.magnitude > 0.1f)
+        {
+            data.direction = Player.instance.hmdTransform.TransformDirection(new Vector3(vrInput.axis.x, 0,vrInput.axis.y));
+        }
+
+        input.Set(data);
+
+    }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) { }
     public void OnConnectedToServer(NetworkRunner runner) { }

@@ -311,9 +311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b9338f3c1cdbb498fafe19e611a218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input:
-    actionPath: /actions/default/in/TouchPad
-    needsReinit: 0
+  _interpolationDataSource: 0
+  _cc: {fileID: 0}
   speed: 2
 --- !u!114 &1202485667815119222
 MonoBehaviour:
@@ -337,6 +336,7 @@ MonoBehaviour:
     RawGuidValue: a3ab941008f246a4c848066355e773cf
   NestedObjects: []
   NetworkedBehaviours:
+  - {fileID: 6588021534025988021}
   - {fileID: 3567361159249097578}
   SimulationBehaviours: []
 --- !u!114 &3567361159249097578
