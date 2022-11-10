@@ -7,78 +7,67 @@ using System;
 using UnityEngine.SceneManagement;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
+using UnityEngine.InputSystem;
 
+public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
+{
+    [SerializeField]
+    private NetworkRunner networkRunner ;
+    [SerializeField]
+    private NetworkPrefabRef playerPrefab; 
+    
 
+    private Dictionary<PlayerRef, NetworkObject> playerList = new Dictionary<PlayerRef, NetworkObject>();
 
-    public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
+    void Start()
     {
-        [SerializeField]
-        private NetworkRunner networkRunner;
-        [SerializeField]
-        private NetworkPrefabRef playerPrefab;
-
-        public SteamVR_Action_Vector2 vrInput;
-        
-
-        private Dictionary<PlayerRef, NetworkObject> playerList = new Dictionary<PlayerRef, NetworkObject>();
-
-        void Start()
-        {
-            StartGame(GameMode.AutoHostOrClient);
-        }
-        async void StartGame(GameMode mode)
-        {
-            // Create the Fusion runner and let it know that we will be providing user input
-            // networkRunner = gameObject.AddComponent<NetworkRunner>();
-            networkRunner.ProvideInput = true;
-
-            // Start or join (depends on gamemode) a session with a specific name
-            await networkRunner.StartGame(new StartGameArgs()
-            {
-                GameMode = mode,
-                SessionName = "TestRoom",
-                Scene = SceneManager.GetActiveScene().buildIndex,
-                SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
-            });
-        }
-
-        public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
-        {
-            Vector3 spawnPosition = Vector3.up * 2;
-            NetworkObject networkPlayerObject = runner.Spawn(playerPrefab, spawnPosition, Quaternion.identity, player);
-            playerList.Add(player, networkPlayerObject);
-        }
-        public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
-        {
-            if (playerList.TryGetValue(player, out NetworkObject networkObject))
-            {
-                runner.Despawn(networkObject);
-                playerList.Remove(player);
-            }
-        }
-        public void OnInput(NetworkRunner runner, NetworkInput input)
-        {
-            var data = new NetworkInputData();
-
-            if (vrInput.axis.magnitude > 0.1f)
-            {
-                data.direction = Player.instance.hmdTransform.TransformDirection(new Vector3(vrInput.axis.x, 0, vrInput.axis.y));
-            }
-
-            input.Set(data);
-
-        }
-        public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
-        public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) { }
-        public void OnConnectedToServer(NetworkRunner runner) { }
-        public void OnDisconnectedFromServer(NetworkRunner runner) { }
-        public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) { }
-        public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) { }
-        public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }
-        public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList) { }
-        public void OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary<string, object> data) { }
-        public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken) { }
-        public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ArraySegment<byte> data) { }
-        public void OnSceneLoadDone(NetworkRunner runner) { }
-        public void OnSceneLoadStart(NetworkRunner runner) { }
+        StartGame(GameMode.AutoHostOrClient);
     }
+
+    async void StartGame(GameMode mode)
+    {
+        networkRunner.ProvideInput = true;
+
+        await networkRunner.StartGame(new StartGameArgs()
+        {
+            GameMode = mode,
+            SessionName = "Fusion Room",
+            Scene = SceneManager.GetActiveScene().buildIndex,
+            SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
+        });
+    }
+
+    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
+    {
+        Vector3 spawnPosition = Vector3.up * 2;
+        NetworkObject networkPlayerObject = runner.Spawn(playerPrefab, spawnPosition, Quaternion.identity, player);
+        playerList.Add(player, networkPlayerObject);
+    }
+    public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
+    {
+        if (playerList.TryGetValue(player, out NetworkObject networkObject))
+        {
+            runner.Despawn(networkObject);
+            playerList.Remove(player);
+           
+        }
+    }
+    public void OnInput(NetworkRunner runner, NetworkInput input)
+    {
+        var data = new NetworkInputData();
+        input.Set(data);
+    }
+    public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
+    public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) { }
+    public void OnConnectedToServer(NetworkRunner runner) { }
+    public void OnDisconnectedFromServer(NetworkRunner runner) { }
+    public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) { }
+    public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) { }
+    public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }
+    public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList) { }
+    public void OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary<string, object> data) { }
+    public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken) { }
+    public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ArraySegment<byte> data) { }
+    public void OnSceneLoadDone(NetworkRunner runner) { }
+    public void OnSceneLoadStart(NetworkRunner runner) { }
+}
