@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
-using Valve.VR;
-using Valve.VR.InteractionSystem;
+
 
 
 
@@ -11,7 +10,7 @@ public class PlayerController : NetworkBehaviour
 {
     public NetworkCharacterControllerPrototype _cc;
 
-    public SteamVR_Action_Vector2 vrInput;
+   // public SteamVR_Action_Vector2 vrInput;
 
 
     public float speed = 10.0f;
@@ -26,7 +25,7 @@ public class PlayerController : NetworkBehaviour
         if (GetInput(out NetworkInputData data))
         {
             data.direction.Normalize();
-            data.direction = Player.instance.hmdTransform.TransformDirection(new Vector3(vrInput.axis.x, 0, vrInput.axis.y));
+            //data.direction = Player.instance.hmdTransform.TransformDirection(new Vector3(vrInput.axis.x, 0, vrInput.axis.y));
             _cc.Move(speed * Runner.DeltaTime * data.direction);
 
         }

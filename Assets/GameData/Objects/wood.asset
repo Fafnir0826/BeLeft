@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: wood
   m_EditorClassIdentifier: 
   itemName: Wood
+  itemType: 0
   itemImage: {fileID: 21300000, guid: af88e637281e9a548aa31d1cb76a0486, type: 3}
   itemHeld: 0
   dropObjects: {fileID: 0}
+  selfObjects: {fileID: 7405670340870258685, guid: 3ea06eeb75fc60342b084b8b1fb8b6e0, type: 3}
   isequip: 0

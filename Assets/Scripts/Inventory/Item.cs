@@ -22,6 +22,7 @@ public class Item : ScriptableObject
     public int itemHeld;
 
     public GameObject dropObjects;
+    public GameObject selfObjects;
 
 
     public bool isequip;
