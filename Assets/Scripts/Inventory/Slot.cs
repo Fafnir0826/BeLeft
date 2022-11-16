@@ -10,11 +10,32 @@ public class Slot : MonoBehaviour
     public Image slotImage;
     public Text slotNum;
 
+    public GameObject itemInSlot;
+
 
     public void CreateObjects() 
     {
-        Instantiate(slotItem.selfObjects,transform.position+Vector3.down,Quaternion.identity);
-        slotItem.itemHeld -= 1;
+        //if (slotItem.selfObjects != null && slotItem.itemHeld > 1)
+        //{
+            Instantiate(slotItem.selfObjects, transform.position + Vector3.down, Quaternion.identity);
+            slotItem.itemHeld -= 1;
+            InventoryManager.RefreshItem();
+            
+       // }
+    }
+
+    public void SetupSlot(Item item) 
+    {
+        if (item == null) 
+        {
+            itemInSlot.SetActive(false);
+
+            return;
+        }
+
+        slotImage.sprite = item.itemImage;
+        slotNum.text = item.itemHeld.ToString();
+        slotItem = item;
     }
 
 }
