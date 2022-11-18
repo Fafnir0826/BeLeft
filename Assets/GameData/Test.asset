@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
   inputItemList:
-  - {fileID: 0}
-  - {fileID: 0}
-  outputItem: {fileID: 0}
+  - {fileID: 11400000, guid: ca14cbcd9fdaf674b86adc2ce68a04b7, type: 2}
+  - {fileID: 11400000, guid: a316f2496a48a02449ef61b8c3322289, type: 2}
+  outputItem: {fileID: 11400000, guid: ca14cbcd9fdaf674b86adc2ce68a04b7, type: 2}

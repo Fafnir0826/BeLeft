@@ -27,7 +27,7 @@ public class Item : ScriptableObject
 
     public bool isequip;
 
-    
+    public Transform prefab;
 
 }
 

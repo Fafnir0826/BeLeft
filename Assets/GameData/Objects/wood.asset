@@ -19,3 +19,4 @@ MonoBehaviour:
   dropObjects: {fileID: 0}
   selfObjects: {fileID: 7405670340870258685, guid: 3ea06eeb75fc60342b084b8b1fb8b6e0, type: 3}
   isequip: 0
+  prefab: {fileID: 4013215674703286593, guid: 3ea06eeb75fc60342b084b8b1fb8b6e0, type: 3}
