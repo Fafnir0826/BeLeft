@@ -54,12 +54,21 @@ public class CraftingAnvil : MonoBehaviour
         foreach (Collider collider in colliderArray) 
         {
            
-            if (collider.TryGetComponent(out ItemHolder itemHolder)) 
+            /*if (collider.TryGetComponent(out ItemHolder itemHolder)) 
             {
                 Debug.Log(collider);
                 if (inputItemList.Contains(itemHolder.item)) 
                 {
                     inputItemList.Remove(itemHolder.item);
+                    consumeItemGameObjectList.Add(collider.gameObject);
+                }
+            }*/
+            if (collider.TryGetComponent(out ItemOnWorld itemOnWorld))
+            {
+                Debug.Log(collider);
+                if (inputItemList.Contains(itemOnWorld.thisItem))
+                {
+                    inputItemList.Remove(itemOnWorld.thisItem);
                     consumeItemGameObjectList.Add(collider.gameObject);
                 }
             }
