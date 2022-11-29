@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public CharacterStates playerStates;
+   // public CharacterStates playerStates;
+    public List<CharacterStates> playerstatesList = new List<CharacterStates>();
 
     List<IEndGameObserver> endGameObservers = new List<IEndGameObserver>();
     protected override void Awake()
@@ -12,12 +13,15 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
         DontDestroyOnLoad(this);
     }
-
-    public void RigisterPlayer(CharacterStates player)
+    /*public void RigisterPlayer(CharacterStates player)
     {
-        playerStates = player;
-
+        playerStates = player; 
+    }*/
+    public void RigisterPlayerList(CharacterStates player)
+    {
+          playerstatesList.Add(player);
     }
+  
 
     public void AddObserver(IEndGameObserver observer)
     {

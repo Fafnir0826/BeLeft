@@ -84,6 +84,7 @@ public class EnemyController : MonoBehaviour,IEndGameObserver
             SwitchAnimation();
             lastAttackTime -= Time.deltaTime;
         }
+       
 
     }
     void SwitchAnimation()
@@ -127,7 +128,6 @@ public class EnemyController : MonoBehaviour,IEndGameObserver
             case EnemyStates.PATROL:
                 isChase = false;
                 agent.speed = speed * 0.5f;
-
                 //判斷是否到了隨機巡邏點
                 if (Vector3.Distance(wayPoint, transform.position) <= agent.stoppingDistance)
                 {
@@ -186,6 +186,16 @@ public class EnemyController : MonoBehaviour,IEndGameObserver
                         //執行攻擊
                         Attack();
                     }
+                }
+                else if (isGuard)
+                {
+                    agent.isStopped = false;
+                    enemyStates = EnemyStates.GUARD;
+                }
+                else
+                {
+                    agent.isStopped = false;
+                    enemyStates = EnemyStates.PATROL;
                 }
                 break;
             case EnemyStates.DEAD:
