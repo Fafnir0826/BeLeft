@@ -61,7 +61,7 @@ public class CharacterStates : MonoBehaviour
 
         if (attacker.isCritical)
         {
-            defender.GetComponent<Animator>().SetTrigger("Hit");
+            //defender.GetComponent<Animator>().SetTrigger("Hit");
         }
 
         //TODO:Update UI
