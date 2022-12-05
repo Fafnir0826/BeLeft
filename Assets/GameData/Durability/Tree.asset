@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Tree
   m_EditorClassIdentifier: 
   maxDurability: 100
-  currentDurability: 100
+  currentDurability: 5

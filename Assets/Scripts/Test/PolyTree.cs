@@ -1,66 +1,30 @@
+using Oculus.Interaction;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PolyTree : MonoBehaviour
 {
-    public enum TreeType
-    {
-        Tree,
-        treehalf,
-        woodTwo,
-        woodOne
-    }
 
     public Durability treeDurability;
-    [SerializeField] private TreeType treeType = TreeType.Tree;
-    public GameObject treehalfTree;
     public GameObject treewoodTwo;
-    public GameObject treewoodOne;
 
     private void Update()
     { 
-        switchType(); 
-    }
-
-
-    void switchType()
-    {
-        if (treeDurability.currentDurability < 80 && treeDurability.currentDurability > 50) 
+        if(treeDurability.currentDurability <= 0) 
         {
-            treeType = TreeType.treehalf;
-           
+            Destroy(gameObject);
         }
     }
-    void switchState()
+
+   
+    private void OnTriggerEnter(Collider other)
     {
-        switch (treeType)
+        if (other.gameObject.tag == "Axe")
         {
-            case TreeType.Tree:
-                Instantiate(treewoodTwo,transform.position,transform.rotation);
-                Instantiate(treewoodOne,transform.position,transform.rotation);
-                Instantiate(treehalfTree, transform.position, transform.rotation);
-
-                break;
-            case TreeType.treehalf:
-                Instantiate(treewoodTwo, transform.position, transform.rotation);
-                Instantiate(treewoodOne, transform.position, transform.rotation);
-                break;
-            case TreeType.woodTwo:
-                Instantiate(treewoodOne, transform.position, transform.rotation);
-                break;
-            case TreeType.woodOne:     
-                break;
-
-        }
-
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Axe")
-        {
-            treeDurability.currentDurability -= 10;
-            switchState();
+            treeDurability.currentDurability -= 1;
+            Vector3 offset = transform.position + new Vector3(Random.Range(0.5f, -0.5f), transform.position.y + 1.0f, Random.Range(0.5f, -0.5f));
+            Instantiate(treewoodTwo, offset, Quaternion.identity);
         }
     }
 
