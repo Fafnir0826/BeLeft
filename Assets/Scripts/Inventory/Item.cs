@@ -25,7 +25,7 @@ public class Item : ScriptableObject
     public GameObject selfObjects;
 
 
-    public bool isequip;
+    //public bool isequip;
 
     public Transform prefab;
 

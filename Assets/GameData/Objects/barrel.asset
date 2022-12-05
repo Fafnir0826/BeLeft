@@ -16,7 +16,6 @@ MonoBehaviour:
   itemType: 1
   itemImage: {fileID: 21300000, guid: 7d053d3b3746a204bb3be41bbecff78f, type: 3}
   itemHeld: 0
-  dropObjects: {fileID: 7405670340870258685, guid: 3ea06eeb75fc60342b084b8b1fb8b6e0, type: 3}
+  dropObjects: {fileID: 0}
   selfObjects: {fileID: 0}
-  isequip: 0
   prefab: {fileID: 7899031532594088233, guid: 303461167179ef746b25af7e4ae5d949, type: 3}
